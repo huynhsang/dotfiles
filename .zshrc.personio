@@ -1,0 +1,61 @@
+# Use login keychain for aws-vault
+export AWS_VAULT_KEYCHAIN_NAME="login"
+# Use long living sessions in aws-vault
+export AWS_SESSION_TTL="12h"
+# Enabling AWS CLI auto-prompt
+export AWS_CLI_AUTO_PROMPT=on-partial
+
+alias awsdev="AWS_PROFILE=dev aws sso login"
+alias kdev="export KUBECONFIG=\"$HOME/.kube/dev.yml\""
+alias kstage="export KUBECONFIG=\"$HOME/.kube/stage.yml\""
+
+alias kcf="export KUBECONFIG=\"$HOME/.kube/chargefuze.yml\""
+
+alias pc=/opt/homebrew/bin/perctl
+alias mc=~/Projects/Personio/personio/monolith-cli
+alias plog="lnav ~/Projects/Personio/personio/app/storage-local/logs/laravel.log"
+alias rplog="echo '' > ~/Projects/Personio/personio/app/storage-local/logs/laravel.log"
+alias pn=pnpm
+alias pnx="pnpm nx"
+alias lg="lazygit"
+
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/go
+#export GOROOT=/opt/homebrew/bin/go
+export GOBIN=$GOPATH/bin
+export PATH="$PATH:$GOPATH/bin"
+
+export MAVEN_PATH=~/Library/Application\ Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/213.6777.52/IntelliJ\ IDEA.app/Contents/plugins/maven/lib/maven3
+export PATH="$PATH:$MAVEN_PATH/bin"
+export GRADLE_USER_HOME="$HOME/.gradle"
+
+
+# quickly go to project
+fper() { cd ~/Projects/Personio/$(ls ~/Projects/Personio/ | fzf) }
+
+
+gjr() {
+  local jira=https://personio.atlassian.net
+  git describe --all | grep -Eo "..-\d+" | xargs -I {} open $jira/browse/\{\}
+}
+
+# go to project merge requests
+fgmr() {
+  local project=$(ls ~/Projects/Personio  | fzf)
+  cd ~/Projects/Personio/$project
+  gmr
+}
+
+# go to project pipelines
+fgpl() {
+  local project=$(ls ~/Projects/Personio  | fzf)
+  cd ~/Projects/Personio/$project
+  gpl
+}
+
+gw() {
+  local items=(":helmInstall" ":helmUnInstall" ":ktlintFormat" ":classes" ":generateproto")
+  local target=$(printf "%s\n" "${items[@]}" | fzf) || return
+  echo "$target"
+  ./gradlew $target $1
+}

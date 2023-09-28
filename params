@@ -1,0 +1,9 @@
+        %echo Generating a basic OpenPGP key
+        Key-Type: RSA
+        Key-Usage: sign
+        Key-Length: 4096
+        Name-Real: sang huynh
+        Name-Email: sang.huynh.ext@personio.de
+        %ask-passphrase
+        %commit
+        %echo done
