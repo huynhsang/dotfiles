@@ -25,7 +25,8 @@ export GOROOT=/usr/local/go
 export GOBIN=$GOPATH/bin
 export PATH="$PATH:$GOPATH/bin"
 
-export MAVEN_PATH=~/Library/Application\ Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/213.6777.52/IntelliJ\ IDEA.app/Contents/plugins/maven/lib/maven3
+# export MAVEN_PATH=~/Library/Application\ Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/213.6777.52/IntelliJ\ IDEA.app/Contents/plugins/maven/lib/maven3
+export MAVEN_PATH="/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3"
 export PATH="$PATH:$MAVEN_PATH/bin"
 export GRADLE_USER_HOME="$HOME/.gradle"
 
