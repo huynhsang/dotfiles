@@ -122,7 +122,7 @@ copy_dotfiles() {
 
   local overwrite_all=false backup_all=false skip_all=false
 
-  for src in $(find . -maxdepth 3 -regextype sed -regex ".*\(conf.*\|\.\/\..*\)" -not -path '*.git*' -not -path '*.DS_Store')
+  for src in $(find . -maxdepth 3 1 sed -regex ".*\(conf.*\|\.\/\..*\)" -not -path '*.git*' -not -path '*.DS_Store')
   do
     dst="$HOME/$(echo $src | cut -d '/' -f 2,3,4)"
     link_file "$src" "$dst"
@@ -132,7 +132,7 @@ copy_dotfiles() {
 setup_git() {
   read -r -p "Do you want to setup git? [y|N] " response
   if [[ $response =~ (y|yes|Y) ]];then
-    git config --global user.email "sang.huynh.ext@personio.de" 
+    git config --global user.email "thanhsangqn3@gmail.com" 
     git config --global user.name "Sang Huynh" 
     git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
     git config --global color.ui true
@@ -146,14 +146,14 @@ setup_git() {
     git config --global color.diff.new "green bold"
     git config --global color.diff.whitespace "red reverse"
 
-    success "Setup git with user.email sang.huynh.ext@personio.de and name is Sang Huynh."
+    success "Setup git with user.email thanhsangqn3@gmail.com and name is Sang Huynh."
   fi
 }
 
 install_homebrew() {
   read -r -p "Do you want to install homebrew? [y|N] " response
   if [[ $response =~ (y|yes|Y) ]];then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew tap caskroom/cask
     success "Installed homebrew"
   fi
@@ -241,7 +241,6 @@ install_font() {
     cd ..
     rm -rf fonts
 
-    brew tap homebrew/cask-fonts
     brew install --cask font-hack-nerd-font
 
     success "Installed font!"
@@ -268,7 +267,7 @@ install_tool() {
     brew install diff-so-fancy
     brew install terminal-notifier
     brew install bluetoothconnector
-    brew install exa
+    brew install eza
     brew install hughbien/tap/thyme
     brew install fzf
     brew install fd
@@ -295,7 +294,7 @@ install_zsh() {
       git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
     fi
     if [ ! -d ~/.zsh/zsh-completions ]; then
-      git clone git://github.com/zsh-users/zsh-completions.git ~/.zsh/zsh-completions 
+      git clone https://github.com/zsh-users/zsh-completions.git ~/.zsh/zsh-completions 
     fi
     success "Installed zsh"
   fi
@@ -331,7 +330,7 @@ install_languages() {
 
   # Python
   brew install pyenv
-  pyenv install 3.11.5
+  pyenv install 3.13.5
 
   # Nvm and Node install
   mkdir ~/.nvm
@@ -339,26 +338,26 @@ install_languages() {
   export NVM_DIR="$HOME/.nvm"
   [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && \. "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
   [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion  
-  nvm install 16
-  nvm alias default 16
+  nvm install 22
+  nvm alias default 22
 }
 
 
-# install_homebrew
-# install_languages
-# setup_git
-#install_nvim
-#install_emacs
-# install_ranger
-# install_tmux
-# install_window_manager
-# install_font
-# install_terminal
-# install_tool
-# install_zsh
-# install_maccy
+install_zsh
+install_homebrew
+install_languages
+setup_git
+install_nvim
+install_tool
+# install_emacs
+install_ranger
+install_terminal
+install_tmux
+install_window_manager
+install_font
+install_maccy
 copy_dotfiles
-#setup_nvim
+setup_nvim
 
 
 echo "----------"

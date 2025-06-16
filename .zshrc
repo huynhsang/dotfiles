@@ -536,8 +536,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && \. "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
 [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
-source ~/.zshrc.personio
-
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # pnpm
@@ -557,4 +555,3 @@ export GPG_TTY=`tty`
 # export PATH="/opt/homebrew/opt/ruby@3.2/bin:$PATH"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
